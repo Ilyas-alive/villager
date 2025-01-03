@@ -39,17 +39,11 @@
         #reload-button, #copy-button {
             width: 50px;
             height: 50px;
-            background-size: cover;
+            background-color: #007BFF;
             border: none;
             cursor: pointer;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.2s ease;
-        }
-        #reload-button {
-            background: url('reload.png') no-repeat center center;
-        }
-        #copy-button {
-            background: url('copy-icon.png') no-repeat center center; /* Replace with your copy icon */
         }
         #reload-button:hover, #copy-button:hover {
             transform: translateY(-2px);
@@ -71,6 +65,8 @@
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Add FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <header>هل تظن انك تعرف القروي حقا ؟</header>
@@ -79,7 +75,9 @@
     </div>
     <div class="button-container">
         <button id="reload-button"></button>
-        <button id="copy-button" onclick="copyText()"></button>
+        <button id="copy-button" onclick="copyText()">
+            <i class="fas fa-copy"></i>  <!-- FontAwesome copy icon -->
+        </button>
     </div>
     <footer>
         <p>by Ilyas El</p>
@@ -105,7 +103,6 @@
     
                         // Clean the jokes by removing the "U" markers and the numbers before the jokes
                         const cleanedJokes = jokes.map(joke => {
-                            // Remove the number and comma at the beginning, then remove the "U" markers
                             return joke.replace(/^\d+,/, '').replace(/U/g, '').trim();
                         });
     
@@ -138,8 +135,7 @@
             document.execCommand("copy");
             document.body.removeChild(textArea);
 
-            // Alert the user
-            alert("تم نسخ النص: " + text);
+            // No alert here
         }
     </script>    
 </body>
