@@ -1,0 +1,122 @@
+<!-- add a button to copy -->
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اعرف القروي !!!</title>
+    <style>
+        body {
+            font-family: 'Amiri', serif;
+            direction: rtl;
+            text-align: center;
+            margin: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        header {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #007BFF;
+            font-weight: bold;
+        }
+        .text-display {
+            border: 2px solid #007BFF;
+            padding: 20px;
+            margin: 20px auto;
+            font-size: 1.4em;
+            line-height: 1.8;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        #reload-button {
+            width: 50px;
+            height: 50px;
+            background: url('reload.png') no-repeat center center;
+            background-size: cover;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+        #reload-button:hover {
+            transform: translateY(-2px);
+        }
+        #reload-button:active {
+            transform: translateY(0);
+        }
+        footer {
+            margin-top: 30px;
+            font-size: 1em;
+            color: #555;
+        }
+        footer a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>هل تظن انك تعرف القروي حقا ؟</header>
+    <div class="text-display" id="text-display">
+        يتم تحميل النكتة...
+    </div>
+    <div class="button-container">
+        <button id="reload-button"></button>
+    </div>
+    <footer>
+        <p>by Ilyas El</p>
+        <p><a href="https://www.facebook.com/profile.php?id=61554413477420" target="_blank">Facebook</a> | <a href="https://github.com/Ilyas-alive/" target="_blank">GitHub</a></p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const textDisplay = document.getElementById('text-display');
+            const button = document.getElementById('reload-button');
+    
+            // Function to fetch a random joke
+            function fetchJoke() {
+                fetch('jokes.csv')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Failed to load modified_jokes.csv');
+                        }
+                        return response.text();
+                    })
+                    .then(data => {
+                        // Split the CSV data into lines and remove empty lines
+                        const jokes = data.split('\n').filter(line => line.trim());
+    
+                        // Clean the jokes by removing the "U" markers and the numbers before the jokes
+                        const cleanedJokes = jokes.map(joke => {
+                            // Remove the number and comma at the beginning, then remove the "U" markers
+                            return joke.replace(/^\d+,/, '').replace(/U/g, '').trim();
+                        });
+    
+                        // Get a random joke from the cleaned list
+                        const randomJoke = cleanedJokes[Math.floor(Math.random() * cleanedJokes.length)];
+                        textDisplay.innerText = randomJoke;
+                    })
+                    .catch(error => {
+                        console.error(error);
+                        textDisplay.innerText = 'عذرًا، تعذر تحميل النكات. يرجى المحاولة لاحقًا!';
+                    });
+            }
+    
+            // Fetch a joke on page load
+            fetchJoke();
+    
+            // Fetch a new joke on button click
+            button.addEventListener('click', fetchJoke);
+        });
+    </script>    
+</body>
+</html>
