@@ -37,19 +37,15 @@
             gap: 10px; /* Space between the buttons */
         }
         #reload-button, #copy-button {
-            width: 50px;
-            height: 50px;
-            background-size: cover;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background-color: #007BFF;
+            color: white;
             border: none;
             cursor: pointer;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.2s ease;
-        }
-        #reload-button {
-            background: url('reload.png') no-repeat center center; /* Path to reload icon */
-        }
-        #copy-button {
-            background: url('copy-icon.png') no-repeat center center; /* Path to copy icon */
+            border-radius: 5px;
         }
         #reload-button:hover, #copy-button:hover {
             transform: translateY(-2px);
@@ -78,8 +74,8 @@
         يتم تحميل النكتة...
     </div>
     <div class="button-container">
-        <button id="reload-button"></button>
-        <button id="copy-button" onclick="copyText()"></button>
+        <button id="reload-button">حقيقة اخرى</button>
+        <button id="copy-button" onclick="copyText()">انسخ</button>
     </div>
     <footer>
         <p>by Ilyas El</p>
