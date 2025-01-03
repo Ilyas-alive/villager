@@ -1,4 +1,3 @@
-<!-- add a button to copy -->
 <!DOCTYPE html>
 <html lang="ar">
 <head>
@@ -33,21 +32,29 @@
         }
         .button-container {
             margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px; /* Space between the buttons */
         }
-        #reload-button {
+        #reload-button, #copy-button {
             width: 50px;
             height: 50px;
-            background: url('reload.png') no-repeat center center;
             background-size: cover;
             border: none;
             cursor: pointer;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.2s ease;
         }
-        #reload-button:hover {
+        #reload-button {
+            background: url('reload.png') no-repeat center center;
+        }
+        #copy-button {
+            background: url('copy-icon.png') no-repeat center center; /* Replace with your copy icon */
+        }
+        #reload-button:hover, #copy-button:hover {
             transform: translateY(-2px);
         }
-        #reload-button:active {
+        #reload-button:active, #copy-button:active {
             transform: translateY(0);
         }
         footer {
@@ -72,6 +79,7 @@
     </div>
     <div class="button-container">
         <button id="reload-button"></button>
+        <button id="copy-button" onclick="copyText()"></button>
     </div>
     <footer>
         <p>by Ilyas El</p>
@@ -117,6 +125,22 @@
             // Fetch a new joke on button click
             button.addEventListener('click', fetchJoke);
         });
+
+        function copyText() {
+            // Get the text from the text display
+            var text = document.getElementById("text-display").innerText;
+            
+            // Create a temporary textarea to copy the text
+            var textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textArea);
+
+            // Alert the user
+            alert("تم نسخ النص: " + text);
+        }
     </script>    
 </body>
 </html>
